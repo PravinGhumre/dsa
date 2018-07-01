@@ -9,7 +9,7 @@ public class SearchingAlgorithms {
 
 	public static void main(String[] args) {
 
-		int[] arr = new int[] { 10, 60, 50, 20, 70, 40, 90, 30, 80, 70 };
+		int[] arr = new int[]{10, 60, 50, 20, 70, 40, 90, 30, 80, 70};
 
 		// Searching an Element
 		unOrderedLinearSearch(arr, 70);// O(n^2)
@@ -24,13 +24,16 @@ public class SearchingAlgorithms {
 		// Check Max Repeated Element
 		maxRepititionBruteForce(arr);// O(n^2)
 
-		arr = new int[] { 1, 2, 3, 5, 6 };
+		arr = new int[]{1, 2, 3, 4, 5, 6, 7};
+		sumAllNumber(arr); // O(n)
+
+		arr = new int[]{1, 2, 3, 5, 6};
 
 		// Find Missing Number
 		findMissingNumber(arr); // O(n)
 		findMissingNumberByXOR(arr); // O(n)
 
-		arr = new int[] { 1, 2, 3, 2, 1 };
+		arr = new int[]{1, 2, 3, 2, 1};
 
 		// Find Number Occurring at Odd number of times
 		findNumberOccurredOddTimesByXOR(arr); // O(n)
@@ -42,31 +45,32 @@ public class SearchingAlgorithms {
 		// Find Single Number Which is not repeated
 		findNonRepeatedNumberByXOR(arr);
 
-		arr = new int[] { 4, 8, 2, 11, 16, };
+		arr = new int[]{4, 8, 2, 11, 16,};
 
 		// Find two elements whose sum is given number
 		findTwoSumAsGivenNumber(arr, 13); // O(n^2)
 		findTwoSumAsGivenNumberBySorting(arr, 13); // O(nlogn)
 		findTwoSumAsGivenNumberByHashTable(arr, 13); // O(n)
 
-		arr = new int[] { 1, 60, -10, 70, -80, 85 };
+		arr = new int[]{1, 60, -10, 70, -80, 85};
 
 		// Find two elements whose sum is closed to ZERO
 		findTwoSumClosetToZERO(arr);
 
-		arr = new int[] { 1, 3, 5, 5, 5, 5, 67, 123, 125 };
+		arr = new int[]{1, 3, 5, 5, 5, 5, 67, 123, 125};
 
 		// Finding First and Last Occurrence of duplicate with Binary Search
-		firstOccuranceOfDuplicateWithBinarySearchTree(arr, 0, arr.length - 1, 5);
+		firstOccuranceOfDuplicateWithBinarySearchTree(arr, 0, arr.length - 1,
+				5);
 		lastOccuranceOfDuplicateWithBinarySearchTree(arr, 0, arr.length - 1, 5);
 
 		// Segregating numbers
-		arr = new int[] { 1, 3, 5, 6, 7, 9, 18, 4, 2, 11 };
+		arr = new int[]{1, 3, 5, 6, 7, 9, 18, 4, 2, 11};
 		seggregateEvenOddNumber(arr);
-		arr = new int[] { 1, 0, 0, 1, 1, 0, 1, 0, 1, 0 };
+		arr = new int[]{1, 0, 0, 1, 1, 0, 1, 0, 1, 0};
 		seggregateZeroAndOnes(arr);
 
-		arr = new int[] { 45, 17, 1, 57, 33, 24, 69, 75 };
+		arr = new int[]{45, 17, 1, 57, 33, 24, 69, 75};
 
 		// K^th smallest/largest number in array
 		findSecondLargestNumber(arr);
@@ -74,6 +78,12 @@ public class SearchingAlgorithms {
 		findKthSmallestNumber(arr, 3);
 		findKthlargestNumber(arr, 3);
 
+	}
+
+	private static void sumAllNumber(int[] arr) {
+		int n = arr.length;
+		int sum = (n) * (n + 1) / 2;
+		System.out.println(" sum " + sum);
 	}
 
 	private static void findKthlargestNumber(int[] arr, int k) {
@@ -162,30 +172,38 @@ public class SearchingAlgorithms {
 		System.out.println(" secondHighestNumber " + secondHighestNumber);
 	}
 
-	private static void lastOccuranceOfDuplicateWithBinarySearchTree(int[] arr, int low, int high, int data) {
+	private static void lastOccuranceOfDuplicateWithBinarySearchTree(int[] arr,
+			int low, int high, int data) {
 		if (high >= low) {
 			int mid = low + (high - low) / 2;
-			if ((mid == high && arr[mid] == data) || (arr[mid] == data && arr[mid + 1] > data)) {
+			if ((mid == high && arr[mid] == data)
+					|| (arr[mid] == data && arr[mid + 1] > data)) {
 				System.out.println(" last occurance is " + mid);
 				return;
 			} else if (data >= arr[mid]) {
-				lastOccuranceOfDuplicateWithBinarySearchTree(arr, mid + 1, high, data);
+				lastOccuranceOfDuplicateWithBinarySearchTree(arr, mid + 1, high,
+						data);
 			} else {
-				lastOccuranceOfDuplicateWithBinarySearchTree(arr, low, mid - 1, data);
+				lastOccuranceOfDuplicateWithBinarySearchTree(arr, low, mid - 1,
+						data);
 			}
 		}
 	}
 
-	private static void firstOccuranceOfDuplicateWithBinarySearchTree(int[] arr, int low, int high, int data) {
+	private static void firstOccuranceOfDuplicateWithBinarySearchTree(int[] arr,
+			int low, int high, int data) {
 		if (high >= low) {
 			int mid = low + (high - low) / 2;
-			if ((mid == low && arr[mid] == data) || (arr[mid] == data && arr[mid - 1] < data)) {
+			if ((mid == low && arr[mid] == data)
+					|| (arr[mid] == data && arr[mid - 1] < data)) {
 				System.out.println(" first occurance is " + mid);
 				return;
 			} else if (arr[mid] >= data) {
-				firstOccuranceOfDuplicateWithBinarySearchTree(arr, low, mid - 1, data);
+				firstOccuranceOfDuplicateWithBinarySearchTree(arr, low, mid - 1,
+						data);
 			} else {
-				firstOccuranceOfDuplicateWithBinarySearchTree(arr, mid + 1, high, data);
+				firstOccuranceOfDuplicateWithBinarySearchTree(arr, mid + 1,
+						high, data);
 			}
 		}
 	}
@@ -211,10 +229,11 @@ public class SearchingAlgorithms {
 				}
 			}
 		}
-		System.out.println("Numbers Found Whose Sum is Closet to ZERO : " + arr[minOne] + " " + arr[minTwo]);
+		System.out.println("Numbers Found Whose Sum is Closet to ZERO : "
+				+ arr[minOne] + " " + arr[minTwo]);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private static void findTwoSumAsGivenNumberByHashTable(int[] arr, int sum) {
 		int temp = 0;
 		Set set = new HashSet();
@@ -252,7 +271,8 @@ public class SearchingAlgorithms {
 		for (int i = 0; i < arr.length; i++) {
 			for (int j = i; j < arr.length; j++) {
 				if (arr[i] + arr[j] == sum) {
-					System.out.println("Numbers Found : " + arr[i] + " " + arr[j]);
+					System.out.println(
+							"Numbers Found : " + arr[i] + " " + arr[j]);
 					return;
 				}
 			}
@@ -371,7 +391,8 @@ public class SearchingAlgorithms {
 	}
 
 	// O(logn)
-	private static void binarySearchRecursive(int[] arr, int low, int high, int data) {
+	private static void binarySearchRecursive(int[] arr, int low, int high,
+			int data) {
 		int mid = low + (high - low) / 2;
 		if (low > high) {
 			System.out.println("No Element Found !!");

@@ -104,7 +104,19 @@ public class BinaryTree {
 		int minDepth = minDepthOfBinaryTree(bt.root);
 		System.out.println(" minDepth " + minDepth);
 
+		int sum = sumOfBinaryTree(bt.root);
+		System.out.println(" sum " + sum);
+
 		mirrorOfBinaryTree(bt.root);
+	}
+
+	private static int sumOfBinaryTree(Node root2) {
+		if (root2 == null) {
+			return 0;
+		} else {
+			return (root2.key + sumOfBinaryTree(root2.left)
+					+ sumOfBinaryTree(root2.right));
+		}
 	}
 
 	private static int minDepthOfBinaryTree(Node root2) {
