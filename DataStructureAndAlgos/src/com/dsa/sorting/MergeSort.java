@@ -6,14 +6,15 @@ public class MergeSort {
 
 	public static void main(String[] args) {
 
-		int[] unsortedArrs = { 8, 9, 4, 6, 2, 7, 5, 3, 1 };
+		int[] unsortedArrs = {8, 9, 4, 6, 2, 7, 5, 3, 1};
 		mergeSort(unsortedArrs, 0, unsortedArrs.length - 1);
-		System.out.println(Arrays.toString(unsortedArrs));
+		System.out.println("mergeSort " + Arrays.toString(unsortedArrs));
 	}
 
-	private static void mergeSort(int[] unsortedArrs, int lowerIdx, int upperIdx) {
+	private static void mergeSort(int[] unsortedArrs, int lowerIdx,
+			int upperIdx) {
 		if (lowerIdx < upperIdx) {
-			int middleIdx = (lowerIdx + upperIdx) / 2;
+			int middleIdx = lowerIdx + (upperIdx - lowerIdx) / 2;
 			mergeSort(unsortedArrs, lowerIdx, middleIdx);
 			mergeSort(unsortedArrs, middleIdx + 1, upperIdx);
 
@@ -21,7 +22,8 @@ public class MergeSort {
 		}
 	}
 
-	private static void merge(int[] unsortedArrs, int lowerIdx, int middleIdx, int upperIdx) {
+	private static void merge(int[] unsortedArrs, int lowerIdx, int middleIdx,
+			int upperIdx) {
 
 		int leftArrSize = middleIdx - lowerIdx + 1;
 		int rightArrSize = upperIdx - middleIdx;
@@ -50,18 +52,6 @@ public class MergeSort {
 			}
 			k++;
 		}
-
-		while (i < leftArrSize && j < rightArrSize) {
-			if (leftArr[i] < rightArr[j]) {
-				unsortedArrs[k] = leftArr[i];
-				i++;
-			} else {
-				unsortedArrs[k] = rightArr[j];
-				j++;
-			}
-			k++;
-		}
-
 		while (i < leftArrSize) {
 			unsortedArrs[k] = leftArr[i];
 			i++;
