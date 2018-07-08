@@ -36,6 +36,8 @@ public class SortingAlgos {
 		unsortedArrs = new int[]{8, 9, 4, 6, 2, 7, 5, 3, 1};
 		quickSort(unsortedArrs, 0, unsortedArrs.length - 1);
 		System.out.println(" quickSort " + Arrays.toString(unsortedArrs));
+
+		// Program to find minimum number of platforms
 	}
 
 	private static void quickSort(int[] unsortedArrs, int lowerIdx,
