@@ -154,7 +154,56 @@ public class LinkedListAlgos {
 		// Check if Linked List is palindrome or not
 
 		// Reverse Linked List in pairs
+		Node reverseLinkedListInPairItr = reverseLinkedListInPairItr(
+				mergedList);
+		System.out.println("\n reverseLinkedListInPairItr ");
+		printAllNodes(reverseLinkedListInPairItr);
 
+		Node reverseLinkedListInPairs = reverseLinkedListInPairs(
+				reverseLinkedListInPairItr);
+		System.out.println("\n reverseLinkedListInPairs ");
+		printAllNodes(reverseLinkedListInPairs);
+
+	}
+
+	private static Node reverseLinkedListInPairs(Node head) {
+		if (head == null || head.next == null) {
+			return head;
+		}
+		// Lets take example of 5->6->7
+		// Here head node is 5
+		// Storing 6 in temp node, it will become our new head
+		Node temp = head.next;
+		// Putting link between 5->7
+		head.next = temp.next;
+		// putting link between 6->5
+		temp.next = head;
+		// recursively calling the function for node 7
+		head.next = reverseLinkedListInPairs(head.next);
+		// returning new head
+		return temp;
+	}
+
+	private static Node reverseLinkedListInPairItr(Node head) {
+		Node current = head;
+		Node temp = null;
+		Node newHead = null;
+		while (current != null && current.next != null) {
+			if (temp != null) {
+				// This is important step
+				temp.next.next = current.next;
+			}
+			temp = current.next;
+			current.next = temp.next;
+			temp.next = current;
+
+			if (newHead == null) {
+				newHead = temp;
+			}
+			current = current.next;
+
+		}
+		return newHead;
 	}
 
 	private Node reverseLinkeListRecursivly(Node head) {
@@ -172,24 +221,15 @@ public class LinkedListAlgos {
 
 	private static Node mergeTwoSortedList(Node list1, Node list2) {
 		if (list1 == null) {
-			System.out.println(" list1 is null ");
 			return list2;
 		}
 		if (list2 == null) {
-			System.out.println(" list2 is null ");
 			return list1;
 		}
 		if (list1.data < list2.data) {
-			System.out.println(" if ");
-			System.out.println(" list1.data & list2.data " + list1.data + " & "
-					+ list2.data);
 			list1.next = mergeTwoSortedList(list1.next, list2);
 			return list1;
 		} else {
-			System.out.println(" else ");
-			System.out.println(" list2.data & list1.data " + list2.data + " & "
-					+ list1.data);
-
 			list2.next = mergeTwoSortedList(list2.next, list1);
 			return list2;
 		}

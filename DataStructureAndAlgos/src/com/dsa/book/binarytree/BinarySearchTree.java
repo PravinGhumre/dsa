@@ -2,71 +2,32 @@ package com.dsa.book.binarytree;
 
 public class BinarySearchTree {
 
-	Node root;
+	TreeNode root;
 
 	BinarySearchTree() {
 		this.root = null;
 	}
 
 	BinarySearchTree(int key) {
-		this.root = new Node(key);
+		this.root = new TreeNode(key);
 	}
 
-	static class Node {
+	static class TreeNode {
 		int key;
-		Node left;
-		Node right;
+		TreeNode left;
+		TreeNode right;
 
-		Node(int key) {
+		TreeNode(int key) {
 			this.key = key;
 			this.left = null;
 			this.right = null;
 		}
 	}
 
-	void insertKey(int key) {
-		this.root = insertNode(this.root, key);
-	}
-
-	Node insertNode(Node root, int key) {
-		if (root == null) {
-			root = new Node(key);
-			return root;
-		}
-
-		if (key < root.key) {
-			root.left = insertNode(root.left, key);
-		} else if (key > root.key) {
-			root.right = insertNode(root.right, key);
-		}
-		return root;
-	}
-
-	Node searchNode(Node root, int key) {
-		if (root == null || root.key == key) {
-			return new Node(key);
-		}
-
-		if (key < root.key) {
-			return searchNode(root.left, key);
-		}
-		return root.right = searchNode(root.right, key);
-
-	}
-
-	void inOrderTraversal(Node root) {
-		if (root == null) {
-			return;
-		}
-		inOrderTraversal(root.left);
-		System.out.print(" " + root.key + " ");
-		inOrderTraversal(root.right);
-	}
-
 	public static void main(String[] args) {
 
 		BinarySearchTree bst = new BinarySearchTree();
-		bst.root = new Node(50);
+		bst.root = new TreeNode(50);
 		bst.insertKey(10);
 		bst.insertKey(20);
 		bst.insertKey(30);
@@ -76,15 +37,22 @@ public class BinarySearchTree {
 		bst.insertKey(80);
 		bst.insertKey(90);
 
-		bst.inOrderTraversal(bst.root);
-		System.out.println("");
-		Node searchNode = bst.searchNode(bst.root, 10);
-		System.out.println(" searchNode " + searchNode.key);
-
 		// All Algorithms of BinaryTree
 
-		Node lcaNode = leastCommonAncestorOfTwoNodes(bst.root, new Node(90),
-				new Node(60));
+		bst.inOrderTraversal(bst.root);
+		System.out.println("");
+
+		bst.preOrderTraversal(bst.root);
+		System.out.println("");
+
+		bst.postOrderTraversal(bst.root);
+		System.out.println("");
+
+		TreeNode searchNode = bst.searchNode(bst.root, 10);
+		System.out.println(" searchNode " + searchNode.key);
+
+		TreeNode lcaNode = leastCommonAncestorOfTwoNodes(bst.root,
+				new TreeNode(90), new TreeNode(60));
 		System.out.println(" lcaNode " + lcaNode.key);
 
 		// Is BinarySearchTree
@@ -102,20 +70,90 @@ public class BinarySearchTree {
 		// Converting Sorted Array to BinarySearchTree
 		int[] sortedArray = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 		int lastElement = sortedArray.length - 1;
-		Node root = buildBSTfromSortedArray(sortedArray, 0, lastElement);
+		TreeNode root = buildBSTfromSortedArray(sortedArray, 0, lastElement);
 		boolean binarySearchTreeTest = isBinarySearchTree(root);
 		System.out.println(" binarySearchTreeTest " + binarySearchTreeTest);
 
 		// Finding Kth Smallest Element in BST
-		Node kthSmallestInBST = kthSmallestInBST(bst.root, 4, 0);
+		TreeNode kthSmallestInBST = kthSmallestInBST(bst.root, 4, 0);
 		System.out.println(" kthSmallestInBST " + kthSmallestInBST.key);
+
+		TreeNode minimumElement = minimumElement(bst.root);
+		System.out.println(" minimumElement " + minimumElement.key);
 	}
 
-	private static Node kthSmallestInBST(Node root2, int k, int counter) {
+	void insertKey(int key) {
+		this.root = insertNode(this.root, key);
+	}
+
+	TreeNode insertNode(TreeNode root, int key) {
+		if (root == null) {
+			root = new TreeNode(key);
+			return root;
+		}
+
+		if (key < root.key) {
+			root.left = insertNode(root.left, key);
+		} else if (key > root.key) {
+			root.right = insertNode(root.right, key);
+		}
+		return root;
+	}
+
+	TreeNode searchNode(TreeNode root, int key) {
+		if (root == null || root.key == key) {
+			return new TreeNode(key);
+		}
+
+		if (key < root.key) {
+			return searchNode(root.left, key);
+		}
+		return root.right = searchNode(root.right, key);
+
+	}
+
+	void inOrderTraversal(TreeNode root) {
+		if (root == null) {
+			return;
+		}
+		inOrderTraversal(root.left);
+		System.out.print(" " + root.key + " ");
+		inOrderTraversal(root.right);
+	}
+
+	private void postOrderTraversal(TreeNode root) {
+		if (root == null) {
+			return;
+		}
+		postOrderTraversal(root.left);
+		postOrderTraversal(root.right);
+		System.out.print(" " + root.key + " ");
+	}
+
+	private void preOrderTraversal(TreeNode root) {
+		if (root == null) {
+			return;
+		}
+		System.out.print(" " + root.key + " ");
+		preOrderTraversal(root.left);
+		preOrderTraversal(root.right);
+	}
+
+	private static TreeNode minimumElement(TreeNode root) {
+		if (root.left == null) {
+			return root;
+		} else {
+			return minimumElement(root.left);
+		}
+
+	}
+
+	private static TreeNode kthSmallestInBST(TreeNode root2, int k,
+			int counter) {
 		if (root2 == null) {
 			return null;
 		}
-		Node left = kthSmallestInBST(root2.left, k, counter);
+		TreeNode left = kthSmallestInBST(root2.left, k, counter);
 		if (left != null) {
 			return left;
 		}
@@ -125,13 +163,13 @@ public class BinarySearchTree {
 		return kthSmallestInBST(root2.right, k, counter);
 	}
 
-	private static Node buildBSTfromSortedArray(int[] sortedArray, int left,
+	private static TreeNode buildBSTfromSortedArray(int[] sortedArray, int left,
 			int right) {
-		Node newNode;
+		TreeNode newNode;
 		if (left > right) {
 			return null;
 		}
-		newNode = new Node(0);
+		newNode = new TreeNode(0);
 		if (left == right) {
 			newNode.key = sortedArray[left];
 			newNode.left = null;
@@ -146,12 +184,12 @@ public class BinarySearchTree {
 		return newNode;
 	}
 
-	private static boolean isBinarySearchTreeRecursivly(Node root2) {
+	private static boolean isBinarySearchTreeRecursivly(TreeNode root2) {
 		int prevValue = Integer.MIN_VALUE;
 		return isBSTRecursivly(root2, prevValue);
 	}
 
-	private static boolean isBSTRecursivly(Node root2, int prevValue) {
+	private static boolean isBSTRecursivly(TreeNode root2, int prevValue) {
 		if (root2 == null) {
 			return true;
 		}
@@ -165,8 +203,8 @@ public class BinarySearchTree {
 		return isBSTRecursivly(root2.right, prevValue);
 	}
 
-	private static boolean isBinarySearchTreeImproved(Node root2, int minValue,
-			int maxValue) {
+	private static boolean isBinarySearchTreeImproved(TreeNode root2,
+			int minValue, int maxValue) {
 		if (root2 == null) {
 			return true;
 		}
@@ -176,7 +214,7 @@ public class BinarySearchTree {
 						maxValue));
 	}
 
-	private static boolean isBinarySearchTree(Node rootNode) {
+	private static boolean isBinarySearchTree(TreeNode rootNode) {
 		if (rootNode == null) {
 			return true;
 		}
@@ -195,7 +233,7 @@ public class BinarySearchTree {
 		return true;
 	}
 
-	private static int findMaxInBinaryTree(Node rootNode) {
+	private static int findMaxInBinaryTree(TreeNode rootNode) {
 		int maxValue = Integer.MIN_VALUE;
 		if (rootNode != null) {
 			int leftMax = findMaxInBinaryTree(rootNode.left);
@@ -214,8 +252,8 @@ public class BinarySearchTree {
 		return maxValue;
 	}
 
-	private static Node leastCommonAncestorOfTwoNodes(Node rootNode, Node node1,
-			Node node2) {
+	private static TreeNode leastCommonAncestorOfTwoNodes(TreeNode rootNode,
+			TreeNode node1, TreeNode node2) {
 		if (rootNode == null) {
 			return rootNode;
 		}
