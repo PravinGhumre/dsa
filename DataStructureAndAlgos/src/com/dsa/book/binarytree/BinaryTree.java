@@ -5,15 +5,15 @@ import java.util.Queue;
 
 public class BinaryTree {
 
-	Node root;
+	TreeNode root;
 
-	static class Node {
+	static class TreeNode {
 
 		int key;
-		Node left;
-		Node right;
+		TreeNode left;
+		TreeNode right;
 
-		Node(int key) {
+		TreeNode(int key) {
 			this.key = key;
 			this.left = null;
 			this.right = null;
@@ -25,10 +25,10 @@ public class BinaryTree {
 	}
 
 	BinaryTree(int key) {
-		this.root = new Node(key);
+		this.root = new TreeNode(key);
 	}
 
-	void inOrderTraversal(Node root) {
+	void inOrderTraversal(TreeNode root) {
 		if (root == null) {
 			return;
 		}
@@ -37,7 +37,7 @@ public class BinaryTree {
 		inOrderTraversal(root.right);
 	}
 
-	void preOrderTraversal(Node root) {
+	void preOrderTraversal(TreeNode root) {
 		if (root == null) {
 			return;
 		}
@@ -46,7 +46,7 @@ public class BinaryTree {
 		preOrderTraversal(root.right);
 	}
 
-	void postOrderTraversal(Node root) {
+	void postOrderTraversal(TreeNode root) {
 		if (root == null) {
 			return;
 		}
@@ -59,13 +59,13 @@ public class BinaryTree {
 
 		BinaryTree bt = new BinaryTree();
 
-		Node root = new Node(1);
-		Node second = new Node(2);
-		Node third = new Node(3);
-		Node four = new Node(4);
-		Node five = new Node(5);
-		Node six = new Node(6);
-		Node seven = new Node(7);
+		TreeNode root = new TreeNode(1);
+		TreeNode second = new TreeNode(2);
+		TreeNode third = new TreeNode(3);
+		TreeNode four = new TreeNode(4);
+		TreeNode five = new TreeNode(5);
+		TreeNode six = new TreeNode(6);
+		TreeNode seven = new TreeNode(7);
 
 		bt.root = root;
 		bt.root.left = second;
@@ -108,9 +108,27 @@ public class BinaryTree {
 		System.out.println(" sum " + sum);
 
 		mirrorOfBinaryTree(bt.root);
+
+		// Max In Binary Tree
+		// Max In Binary Tree Traversal Order
+		// Find In Binary Tree
+		// Size Of Binary Tree
+		// Max Depth Of Binary Tree
+		// Min Depth Of Binary Tree
+		// Print Leaf Nodes
+		// LCA of Binary Tree
+		// Mirror Of Binary Tree
+		// Level Order Traversal
+		// Pre Order Traversal
+		// Post Order Traversal
+		// Spiral Order Traversal
+		// Boundary Traversal
+		// Print All Paths Of Binary Tree
+		// Print Vertical Sum Of Binay Tree
+		// Get Level Of Node In Binary Tree
 	}
 
-	private static int sumOfBinaryTree(Node root2) {
+	private static int sumOfBinaryTree(TreeNode root2) {
 		if (root2 == null) {
 			return 0;
 		} else {
@@ -119,7 +137,7 @@ public class BinaryTree {
 		}
 	}
 
-	private static int minDepthOfBinaryTree(Node root2) {
+	private static int minDepthOfBinaryTree(TreeNode root2) {
 		if (root2 == null) {
 			return 0;
 		}
@@ -136,8 +154,8 @@ public class BinaryTree {
 				minDepthOfBinaryTree(root2.right)) + 1;
 	}
 
-	private static Node mirrorOfBinaryTree(Node rootNode) {
-		Node temp;
+	private static TreeNode mirrorOfBinaryTree(TreeNode rootNode) {
+		TreeNode temp;
 		if (rootNode != null) {
 			mirrorOfBinaryTree(rootNode.left);
 			mirrorOfBinaryTree(rootNode.right);
@@ -149,7 +167,7 @@ public class BinaryTree {
 		return rootNode;
 	}
 
-	private static int maxDepthOfBinaryTree(Node rootNode) {
+	private static int maxDepthOfBinaryTree(TreeNode rootNode) {
 		if (rootNode == null) {
 			return 0;
 		}
@@ -158,7 +176,7 @@ public class BinaryTree {
 		return (leftDepth > rightDepth) ? leftDepth + 1 : rightDepth + 1;
 	}
 
-	private static int sizeOfBinaryTree(Node rootNode) {
+	private static int sizeOfBinaryTree(TreeNode rootNode) {
 		int leftCount = rootNode.left == null
 				? 0
 				: sizeOfBinaryTree(rootNode.left);
@@ -168,7 +186,7 @@ public class BinaryTree {
 		return 1 + leftCount + rightCount;
 	}
 
-	private static boolean findInBinaryTree(Node rootNode, int value) {
+	private static boolean findInBinaryTree(TreeNode rootNode, int value) {
 		if (rootNode == null) {
 			return false;
 		}
@@ -179,16 +197,16 @@ public class BinaryTree {
 				|| findInBinaryTree(rootNode.right, value);
 	}
 
-	private static int maxInBinaryTreeLevelOrder(Node rootNode) {
+	private static int maxInBinaryTreeLevelOrder(TreeNode rootNode) {
 		int maxValue = Integer.MIN_VALUE;
 		if (rootNode == null) {
 			return maxValue;
 		}
-		Queue<Node> queue = new LinkedList<>();
+		Queue<TreeNode> queue = new LinkedList<>();
 		queue.offer(rootNode);
 
 		while (!queue.isEmpty()) {
-			Node temp = queue.poll();
+			TreeNode temp = queue.poll();
 			if (temp.key > maxValue) {
 				maxValue = temp.key;
 			}
@@ -205,7 +223,7 @@ public class BinaryTree {
 		return maxValue;
 	}
 
-	private static int maxInBinaryTree(Node rootNode) {
+	private static int maxInBinaryTree(TreeNode rootNode) {
 		int maxValue = Integer.MIN_VALUE;
 		if (rootNode != null) {
 			int leftMax = maxInBinaryTree(rootNode.left);
