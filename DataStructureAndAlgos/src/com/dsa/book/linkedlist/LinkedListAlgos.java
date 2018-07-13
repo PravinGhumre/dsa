@@ -76,14 +76,14 @@ public class LinkedListAlgos {
 		System.out.println(" ");
 		printAllNodes(reversedLinkedList);
 
-		lla.head = lla.reverseLinkeListRecursivly(reversedLinkedList);
+		lla.head = lla.reverseLinkeList(reversedLinkedList);
 		System.out.println(" ");
 		printAllNodes(lla.head);
 
 		// Find Middle Element in Linked List
 		Node fifth = new Node(50);
 		lla.addNodeAtLast(fifth);
-		System.out.println("");
+		System.out.println(" Complete List ");
 		printAllNodes(lla.head);
 
 		Node middleElement = lla.findMiddleElementInLinkedList(lla.head);
@@ -165,7 +165,38 @@ public class LinkedListAlgos {
 		printAllNodes(reverseLinkedListInPairs);
 
 		// Find Megre Point of Two Linked List
+		LinkedListAlgos llaMergeOne = new LinkedListAlgos();
+		Node thirty = new Node(30);
+		Node fourty = new Node(40);
+		llaMergeOne.head = new Node(10);
+		llaMergeOne.addNodeAtLast(new Node(20));
+		llaMergeOne.addNodeAtLast(thirty);
+		llaMergeOne.addNodeAtLast(fourty);
 
+		LinkedListAlgos llaMergeTwo = new LinkedListAlgos();
+		llaMergeTwo.head = new Node(1);
+		llaMergeTwo.addNodeAtLast(new Node(2));
+		llaMergeTwo.addNodeAtLast(thirty);
+
+		Node mergePoint = findMergePointOfTwoLinkeList(llaMergeOne.head,
+				llaMergeTwo.head);
+		System.out.println(" mergePoint " + mergePoint.data);
+
+	}
+
+	private static Node findMergePointOfTwoLinkeList(Node head1, Node head2) {
+		Node temp;
+		while (head1 != null) {
+			temp = head2;
+			while (temp != null) {
+				if (head1 == temp) {
+					return head1;
+				}
+				temp = temp.next;
+			}
+			head1 = head1.next;
+		}
+		return null;
 	}
 
 	private static Node reverseLinkedListInPairs(Node head) {
@@ -252,7 +283,6 @@ public class LinkedListAlgos {
 	private Node unionOfTwoLinkedList(Node head1, Node head2) {
 		Node t1 = head1;
 		Node t2 = head2;
-
 		LinkedListAlgos llaNew = new LinkedListAlgos();
 		while (t1 != null) {
 			buildNewLinkedList(llaNew, t1.data);
@@ -269,10 +299,11 @@ public class LinkedListAlgos {
 
 	private boolean isPresent(Node headNew, int data) {
 		if (headNew == null) {
-			System.out.println(" head is null !!!");
+			System.out.println(" headNew is null ");
 			return false;
 		}
 		Node currentNode = headNew;
+
 		while (currentNode != null) {
 			if (currentNode.data == data) {
 				return true;
@@ -332,37 +363,31 @@ public class LinkedListAlgos {
 	}
 
 	private Node findMiddleElementInLinkedList(Node head) {
-		if (head == null) {
-			System.out.println(" head is null !!!");
-			return head;
-		}
 		Node slowPointer = head;
 		Node fastPointer = head;
-
 		while (slowPointer != null && fastPointer != null
 				&& fastPointer.next != null) {
 			slowPointer = slowPointer.next;
 			fastPointer = fastPointer.next.next;
 		}
-
 		return slowPointer;
 	}
 
 	private Node reverseLinkeList(Node head) {
+		Node currentNode = head;
+		Node tempNode = null;
+		Node prevNode = null;
 		if (head == null) {
-			System.out.println(" head is null !!!");
+			System.out.println(" head is null !!");
 			return head;
 		}
-		Node prevNode = null;
-		Node tempNode = null;
-		Node currentNode = head;
-
 		while (currentNode != null) {
 			tempNode = currentNode.next;
 			currentNode.next = prevNode;
 			prevNode = currentNode;
 			currentNode = tempNode;
 		}
+
 		return prevNode;
 	}
 

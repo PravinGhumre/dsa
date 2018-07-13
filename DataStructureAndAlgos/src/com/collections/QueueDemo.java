@@ -1,5 +1,6 @@
 package com.collections;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -13,8 +14,8 @@ public class QueueDemo {
 
 	public static void main(String[] args) {
 
-		// queueOperations();
-		// blockingQueueOperations();
+		queueOperations();
+		blockingQueueOperations();
 		dequeOperations();
 
 	}

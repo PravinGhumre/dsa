@@ -136,22 +136,23 @@ public class BinaryTree {
 					+ sumOfBinaryTree(root2.right));
 		}
 	}
-
-	private static int minDepthOfBinaryTree(TreeNode root2) {
-		if (root2 == null) {
+	
+	private static int maxDepthOfBinaryTree(TreeNode rootNode) {
+		if (rootNode == null) {
 			return 0;
 		}
-		if (root2.left == null && root2.right == null) {
-			return 1;
+		int leftDepth = maxDepthOfBinaryTree(rootNode.left);
+		int rightDepth = maxDepthOfBinaryTree(rootNode.right);
+		return (leftDepth > rightDepth) ? leftDepth + 1 : rightDepth + 1;
+	}
+
+	private static int minDepthOfBinaryTree(TreeNode rootNode) {
+		if (rootNode == null) {
+			return 0;
 		}
-		if (root2.left == null) {
-			return minDepthOfBinaryTree(root2.right) + 1;
-		}
-		if (root2.right == null) {
-			return minDepthOfBinaryTree(root2.left) + 1;
-		}
-		return Math.min(minDepthOfBinaryTree(root2.left),
-				minDepthOfBinaryTree(root2.right)) + 1;
+		int leftDepth = minDepthOfBinaryTree(rootNode.left);
+		int rightDepth = minDepthOfBinaryTree(rootNode.right);
+		return (leftDepth < rightDepth) ? leftDepth + 1 : rightDepth + 1;
 	}
 
 	private static TreeNode mirrorOfBinaryTree(TreeNode rootNode) {
@@ -165,15 +166,6 @@ public class BinaryTree {
 			rootNode.right = temp;
 		}
 		return rootNode;
-	}
-
-	private static int maxDepthOfBinaryTree(TreeNode rootNode) {
-		if (rootNode == null) {
-			return 0;
-		}
-		int leftDepth = maxDepthOfBinaryTree(rootNode.left);
-		int rightDepth = maxDepthOfBinaryTree(rootNode.right);
-		return (leftDepth > rightDepth) ? leftDepth + 1 : rightDepth + 1;
 	}
 
 	private static int sizeOfBinaryTree(TreeNode rootNode) {
@@ -193,6 +185,7 @@ public class BinaryTree {
 		if (rootNode.key == value) {
 			return true;
 		}
+
 		return findInBinaryTree(rootNode.left, value)
 				|| findInBinaryTree(rootNode.right, value);
 	}
@@ -216,7 +209,6 @@ public class BinaryTree {
 				}
 				if (temp.right != null) {
 					queue.offer(temp.right);
-
 				}
 			}
 		}
@@ -239,6 +231,7 @@ public class BinaryTree {
 				maxValue = rootNode.key;
 			}
 		}
+
 		return maxValue;
 	}
 }

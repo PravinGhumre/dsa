@@ -83,7 +83,6 @@ public class SortingAlgos {
 			int middleIdx = lowerIdx + (upperIdx - lowerIdx) / 2;
 			mergeSort(unsortedArrs, lowerIdx, middleIdx);
 			mergeSort(unsortedArrs, middleIdx + 1, upperIdx);
-
 			merge(unsortedArrs, lowerIdx, middleIdx, upperIdx);
 		}
 	}
@@ -100,11 +99,12 @@ public class SortingAlgos {
 			leftArr[i] = unsortedArrs[lowerIdx + i];
 		}
 
-		for (int j = 0; j < rightArr.length; j++) {
-			rightArr[j] = unsortedArrs[middleIdx + j + 1];
+		for (int i = 0; i < rightArr.length; i++) {
+			rightArr[i] = unsortedArrs[middleIdx + 1 + i];
 		}
 
-		int i = 0, j = 0;
+		int i = 0;
+		int j = 0;
 		int k = lowerIdx;
 
 		while (i < leftArrSize && j < rightArrSize) {
@@ -133,8 +133,8 @@ public class SortingAlgos {
 
 	private static int[] insertionSort(int[] unsortedArrs) {
 		for (int i = 1; i < unsortedArrs.length; i++) {
-			int valueToBeInserted = unsortedArrs[i];
 			int hole = i;
+			int valueToBeInserted = unsortedArrs[i];
 			while (hole > 0 && unsortedArrs[hole - 1] > valueToBeInserted) {
 				unsortedArrs[hole] = unsortedArrs[hole - 1];
 				hole = hole - 1;
@@ -182,7 +182,6 @@ public class SortingAlgos {
 					unsortedArrs[j] = temp;
 				}
 			}
-
 		}
 		return unsortedArrs;
 	}

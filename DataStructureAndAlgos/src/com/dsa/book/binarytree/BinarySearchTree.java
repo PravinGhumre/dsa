@@ -96,7 +96,7 @@ public class BinarySearchTree {
 
 		if (key < root.key) {
 			root.left = insertNode(root.left, key);
-		} else if (key > root.key) {
+		} else {
 			root.right = insertNode(root.right, key);
 		}
 		return root;

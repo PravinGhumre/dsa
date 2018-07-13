@@ -27,7 +27,7 @@ public class SearchingAlgorithms {
 		arr = new int[]{1, 2, 3, 4, 5, 6, 7};
 		sumAllNumber(arr); // O(n)
 
-		arr = new int[]{1, 2, 3, 5, 6};
+		arr = new int[]{1, 2, 3, 5, 6, 7};
 
 		// Find Missing Number
 		findMissingNumber(arr); // O(n)
@@ -124,17 +124,18 @@ public class SearchingAlgorithms {
 	private static void seggregateEvenOddNumber(int[] arr) {
 		int left = 0;
 		int right = arr.length - 1;
+
 		while (left < right) {
 			while (arr[left] % 2 == 0 && left < right) {
 				left++;
 			}
-			while (arr[right] % 2 == 1 && left < right) {
+			while (arr[right] % 2 == 0 && left < right) {
 				right--;
 			}
-			if (left < right) {
+			if(left < right) {
 				int temp = arr[left];
-				arr[left] = arr[right];
-				arr[right] = temp;
+				arr[right] = arr[left];
+				arr[left] = temp;
 				left++;
 				right--;
 			}
@@ -211,21 +212,21 @@ public class SearchingAlgorithms {
 	private static void findTwoSumClosetToZERO(int[] arr) {
 		int length = arr.length;
 		if (length < 2) {
-			System.out.println("Invalid Input !!");
+			System.out.println(" Invalid Input !!");
 			return;
 		}
-		int minSum, minOne, minTwo, sum;
-		minOne = 0;
-		minTwo = 1;
-		minSum = arr[0] + arr[1];
+		int minOne = 0;
+		int minTwo = 0;
+		int minSum = arr[0] + arr[1];
+		int sum = 0;
 
-		for (int i = 0; i < length - 1; i++) {
-			for (int j = i + 1; j < length; j++) {
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = i + 1; j < arr.length; j++) {
 				sum = arr[i] + arr[j];
 				if (Math.abs(minSum) > Math.abs(sum)) {
-					minSum = sum;
 					minOne = i;
 					minTwo = j;
+					minSum = sum;
 				}
 			}
 		}
@@ -341,6 +342,7 @@ public class SearchingAlgorithms {
 	private static void findMissingNumber(int[] arr) {
 		int n = arr.length;
 		int total = (n + 1) * (n + 2) / 2;
+		System.out.println(" total " + total);
 		int sum = 0;
 		for (int i = 0; i < arr.length; i++) {
 			sum += arr[i];
@@ -418,10 +420,11 @@ public class SearchingAlgorithms {
 			if (arr[mid] == data) {
 				System.out.println(" Element Searched at index " + mid);
 				return;
-			} else if (arr[mid] > data) {
-				high = mid - 1;
-			} else {
+			}
+			if (data > arr[mid]) {
 				low = mid + 1;
+			} else {
+				high = mid - 1;
 			}
 		}
 		System.out.println("No Element Found !!");
@@ -435,10 +438,10 @@ public class SearchingAlgorithms {
 				System.out.println(" Element Searched at index " + j);
 				return;
 			} else if (arr[j] > value) {
+				System.out.println("No Element Found !!");
 				return;
 			}
 		}
-		System.out.println("No Element Found !!");
 	}
 
 	// O(n)
